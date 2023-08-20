@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
         InstaServiceResponse instaServiceResponse = new InstaServiceResponse();
         ObjectMapper mapper = new ObjectMapper();
         User user = userRepository.getByUserId(userId).orElse(null);
-        if(!ObjectUtils.isEmpty(user)) {
-            try{
+        if (!ObjectUtils.isEmpty(user)) {
+            try {
                 UserModel userModel = UserMapper.entityToModel(user);
                 instaServiceResponse.setHasError(false);
                 instaServiceResponse.setMessage("User information found successfully.");
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
         InstaServiceResponse instaServiceResponse = new InstaServiceResponse();
 
-        if(ObjectUtils.isEmpty(userModel.getUserId()) || userRepository.existsById(userModel.getUserId())) {
+        if (ObjectUtils.isEmpty(userModel.getUserId()) || userRepository.existsById(userModel.getUserId())) {
             User user = UserMapper.modelToEntity(userModel);
             try {
                 user = userRepository.save(user);
@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
             instaServiceResponse.setMessage("User information not found, failed to save user");
             instaServiceResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         }
-git
         return instaServiceResponse;
     }
 }

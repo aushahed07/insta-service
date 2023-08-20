@@ -6,8 +6,6 @@ import com.shahed.instaservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -16,19 +14,24 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/hello")
-    public String greetings(){
+    public String greetings() {
         return "Instagram service is running....";
     }
 
     @GetMapping(value = "/{id}")
-    public InstaServiceResponse getUserModelById(@PathVariable Long id){
+    public InstaServiceResponse getUserModelById(@PathVariable Long id) {
         return userService.getUserModelById(id);
     }
 
     @PostMapping()
-    public InstaServiceResponse createUser(@RequestBody UserModel userModel){
+    public InstaServiceResponse createUser(@RequestBody UserModel userModel) {
         return userService.saveOrUpdateUserModel(userModel);
     }
 
+    @PatchMapping("/{id}")
+    public InstaServiceResponse updateUser(@RequestBody UserModel userModel, @PathVariable Long id) {
+        userModel.setUserId(id);
+        return userService.saveOrUpdateUserModel(userModel);
+    }
 
 }
