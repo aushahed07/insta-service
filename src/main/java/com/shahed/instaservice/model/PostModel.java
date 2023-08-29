@@ -1,6 +1,5 @@
 package com.shahed.instaservice.model;
 
-import com.shahed.instaservice.schema.User;
 import lombok.Data;
 
 import java.util.List;
@@ -11,6 +10,6 @@ public class PostModel {
     private String caption;
     private String latitude;
     private String longitude;
-    private User user;
+    private Long userId;
     private List<PostMediaModel> postMedias;
 }

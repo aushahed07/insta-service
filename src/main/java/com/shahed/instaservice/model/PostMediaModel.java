@@ -1,7 +1,7 @@
 package com.shahed.instaservice.model;
 
-import com.shahed.instaservice.schema.Post;
 import lombok.Data;
+
 import java.util.List;
 
 @Data
@@ -10,6 +10,10 @@ public class PostMediaModel {
     private Integer positionInPost;
     private String type;
     private byte[] mediaFile;
-    private Post post;
+    private Long postId;
     private List<PostMediaTagModel> postMediaTags;
+
+    public void setMediaFile(String mediaFile) {
+        this.mediaFile = mediaFile.getBytes();
+    }
 }
