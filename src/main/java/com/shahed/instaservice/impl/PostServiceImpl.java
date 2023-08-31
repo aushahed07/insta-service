@@ -64,7 +64,7 @@ public class PostServiceImpl implements PostService {
                 instaServiceResponse.setContent(post.getPostId().toString());
             } catch (Exception exception) {
                 exception.printStackTrace();
-                return new InstaServiceResponse("Failed to save user", exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+                return new InstaServiceResponse("Failed to save post", exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
             }
         } else {
             instaServiceResponse.setHasError(Boolean.TRUE);
@@ -92,6 +92,7 @@ public class PostServiceImpl implements PostService {
                 logger.info(message + " userId: " + postMediaTagModel.getTaggedUserId());
                 throw new Exception();
             }
+            postMediaTagModel.setPostMediaId(postMediaModel.getPostMediaId());
             PostMediaTag postMediaTag = PostMediaTagMapper.modelToEntity(postMediaTagModel);
             postMediaTagRepository.save(postMediaTag);
         }
