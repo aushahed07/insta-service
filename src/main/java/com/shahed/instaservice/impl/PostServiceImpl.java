@@ -74,6 +74,15 @@ public class PostServiceImpl implements PostService {
         return instaServiceResponse;
     }
 
+    @Override
+    public InstaServiceResponse updatePost(Long id, PostModel postModel) {
+        if(ObjectUtils.isEmpty(id) || id <= 0 || !postRepository.existsById(id)) {
+            return new InstaServiceResponse("Invalid post.", 400);
+        }
+        postModel.setPostId(id);
+        return saveOrUpdatePost(postModel);
+    }
+
     private void savePostMedias(PostModel postModel) throws Exception {
         for (PostMediaModel postMediaModel : postModel.getPostMedias()) {
             postMediaModel.setPostId(postModel.getPostId());

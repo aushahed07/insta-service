@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface PostService {
 
     InstaServiceResponse saveOrUpdatePost(PostModel postModel);
+
+    InstaServiceResponse updatePost(Long id, PostModel postModel);
 }
